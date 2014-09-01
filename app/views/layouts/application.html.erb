@@ -7,6 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= flash[:alert] %>
+<%= flash[:notice] %>
 <div id="container">
   <div id="user_header">
     <% if current_user %>
@@ -16,10 +18,9 @@
       <%= link_to "Sign Up", signup_path %> or
       <%= link_to "Log In", login_path %>
     <% end %>
-</div
+</div>
 
-<%= flash[:alert] %>
-<%= flash[:notice] %>
+
 
 
 <%= yield %>
