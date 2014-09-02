@@ -20,6 +20,19 @@ class DataSetsController < ApplicationController
     @data_set = DataSet.find(params[:id])
   end
 
+  def edit
+    @data_set = DataSet.find(params[:id])
+  end
+
+  def update
+    @data_set = DataSet.find(params[:id])
+    if @data_set.update(user_params)
+      redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
+    else
+      render 'edit'
+    end
+  end
+
 private
 
   def user_params
