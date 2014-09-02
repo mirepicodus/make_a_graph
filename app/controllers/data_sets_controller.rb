@@ -16,10 +16,14 @@ class DataSetsController < ApplicationController
     end
   end
 
+  def show
+    @data_set = DataSet.find(params[:id])
+  end
+
 private
 
   def user_params
-    params.require(:data_set).permit(:name, :json_data)
+    params.require(:data_set).permit(:name, :node, :json_data)
   end
 
 end
