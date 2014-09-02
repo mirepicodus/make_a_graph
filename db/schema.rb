@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140901190437) do
+ActiveRecord::Schema.define(version: 20140902000432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "data_sets", force: true do |t|
-    t.string   "json_data"
     t.string   "node"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.json     "json_data"
   end
 
   create_table "users", force: true do |t|
