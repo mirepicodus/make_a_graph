@@ -1,0 +1,17 @@
+<%= render("layouts/errors", :object => @data_set) %>
+
+<%= form_for(@data_set) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :node %>
+    <%= f.text_field :node %>
+  </div>
+  <div class="form-group">
+    <%= f.label :data %>
+    <%= f.text_field :json_data %>
+  </div>
+  <%= f.submit(:class => "btn btn-primary") %>
+<% end %>
