@@ -33,6 +33,12 @@ class DataSetsController < ApplicationController
     end
   end
 
+  def destroy
+    @data_set = DataSet.find(params[:id])
+    @data_set.destroy
+    redirect_to root_path, notice: "Data Set deleted"
+  end
+
 private
 
   def user_params
