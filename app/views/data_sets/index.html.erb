@@ -1,1 +1,7 @@
 <h1>Data Sets</h1>
+
+<ul>
+<% @data_sets.each do |data_set| %>
+  <li>Data Set Name: <%= data_set.name %>  |  Data: <%= data_set.json_data %></li>
+<% end %>
+</ul>
