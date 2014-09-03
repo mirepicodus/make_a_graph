@@ -1,4 +1,6 @@
 class DataSetsController < ApplicationController
+  before_filter :authorize, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @data_sets = DataSet.all
   end
