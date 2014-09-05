@@ -10,11 +10,15 @@ class DataSetsController < ApplicationController
   end
 
   def create
-    @data_set = current_user.data_sets.new(user_params)
-    if @data_set.save
-      redirect_to root_path, notice: "Thanks for submitting!"
+    if !(JSON.is_json?(user_params[:json_data]))
+      redirect_to :back, notice: "Json Issues!"
     else
-      render "new"
+      @data_set = current_user.data_sets.new(user_params)
+      if @data_set.save
+        redirect_to root_path, notice: "Thanks for submitting!"
+      else
+        render "new"
+      end
     end
   end
 
