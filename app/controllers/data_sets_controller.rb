@@ -32,10 +32,14 @@ class DataSetsController < ApplicationController
 
   def update
     @data_set = DataSet.find(params[:id])
-    if @data_set.update(user_params)
-      redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
+    if !(JSON.is_json?(user_params[:json_data]))
+      redirect_to :back, notice: "Json Issues!"
     else
-      render 'edit'
+      if @data_set.update(user_params)
+        redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
+      else
+        render 'edit'
+      end
     end
   end
 
