@@ -34,4 +34,18 @@ describe "the data_set create process" do
     page.should have_content 'Please fix these errors:'
   end
 
+  it "does not allows user to enter non json data_set" do
+    visit '/signup'
+    fill_in 'Email', :with => 'user@example.com'
+    fill_in 'Password', :with => 'password'
+    fill_in 'Password confirmation', :with => 'password'
+    click_button 'Sign Up'
+    visit '/data_sets/new'
+    fill_in 'Name', :with => 'Test Name'
+    fill_in 'Node', :with => 'Test Node'
+    fill_in "Json data", :with => 'not json'
+    click_button 'Create Data set'
+    page.should have_content 'Json Issues!'
+  end
+
 end
