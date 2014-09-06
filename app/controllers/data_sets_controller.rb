@@ -11,7 +11,7 @@ class DataSetsController < ApplicationController
 
   def create
     if !(JSON.is_json?(user_params[:json_data]))
-      redirect_to :back, notice: "Json Issues!"
+      redirect_to :back, notice: "Not JSON format."
     else
       @data_set = current_user.data_sets.new(user_params)
       if @data_set.save
@@ -33,7 +33,7 @@ class DataSetsController < ApplicationController
   def update
     @data_set = DataSet.find(params[:id])
     if !(JSON.is_json?(user_params[:json_data]))
-      redirect_to :back, notice: "Json Issues!"
+      redirect_to :back, notice: "Not JSON format."
     else
       if @data_set.update(user_params)
         redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
