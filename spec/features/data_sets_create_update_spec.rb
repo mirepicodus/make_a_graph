@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe "the data_set create process" do
+describe "the data_set create process & edit process" do
+
   it "redirects user that is not logged in to login page" do
     visit '/data_sets/new'
     expect(current_path).to eq '/login'
