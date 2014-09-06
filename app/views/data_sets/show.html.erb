@@ -8,3 +8,15 @@
                          :data => {:confirm => "You sure?",
                                    :method => "delete"},
                          :class => "btn btn-danger" %></p>
+
+<div class="alchemy" id="alchemy"></div>
+  <script type="text/javascript">
+    var config = {
+      dataSource: <%= @data_set.data_to_alchemy.html_safe%>,
+      graphHeight: function(){ return 600; },
+      graphWidth: function(){ return 600; },
+      curvedEdges: function(){return true; },
+    };
+    alchemy.begin(config)
+  </script>
+</div>
