@@ -15,13 +15,13 @@ describe "the data_set create process & edit process" do
     click_button 'Sign Up'
     visit '/data_sets/new'
     fill_in 'Name', :with => 'Test Name'
-    fill_in 'Node', :with => 'Test Node'
+    fill_in 'Node', :with => 'hello'
     fill_in "Json data", :with => '[{"hello": "goodbye"}]'
     click_button 'Create Data set'
     page.should have_content 'Thanks for submitting!'
   end
 
-  it "does not allows user to leave field blank in creating a data_set" do
+  it "does not allows user to leave name blank in creating a data_set" do
     visit '/signup'
     fill_in 'Email', :with => 'user@example.com'
     fill_in 'Password', :with => 'password'
@@ -29,7 +29,7 @@ describe "the data_set create process & edit process" do
     click_button 'Sign Up'
     visit '/data_sets/new'
     fill_in 'Name', :with => ''
-    fill_in 'Node', :with => ''
+    fill_in 'Node', :with => 'hello'
     fill_in "Json data", :with => '[{"hello": "goodbye"}]'
     click_button 'Create Data set'
     page.should have_content 'Please fix these errors:'
@@ -46,7 +46,22 @@ describe "the data_set create process & edit process" do
     fill_in 'Node', :with => 'Test Node'
     fill_in "Json data", :with => 'not json'
     click_button 'Create Data set'
-    page.should have_content 'Json Issues!'
+    page.should have_content 'Not JSON format.'
+  end
+
+
+  it "does not allows user to enter non json data_set" do
+    visit '/signup'
+    fill_in 'Email', :with => 'user@example.com'
+    fill_in 'Password', :with => 'password'
+    fill_in 'Password confirmation', :with => 'password'
+    click_button 'Sign Up'
+    visit '/data_sets/new'
+    fill_in 'Name', :with => 'Test Name'
+    fill_in 'Node', :with => 'Test Node'
+    fill_in "Json data", :with => '[{"hello": "goodbye"}]'
+    click_button 'Create Data set'
+    page.should have_content 'Node not included as key in JSON'
   end
 
 end

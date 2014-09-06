@@ -10,10 +10,12 @@ class DataSetsController < ApplicationController
   end
 
   def create
-    if !(JSON.is_json?(user_params[:json_data]))
+    if !(JSON.is_json?(data_set_params[:json_data]))
       redirect_to :back, notice: "Not JSON format."
+    elsif !(JSON.parse(data_set_params[:json_data]).first.has_key?(data_set_params[:node]))
+      redirect_to :back, notice: "Node not included as key in JSON."
     else
-      @data_set = current_user.data_sets.new(user_params)
+      @data_set = current_user.data_sets.new(data_set_params)
       if @data_set.save
         redirect_to root_path, notice: "Thanks for submitting!"
       else
@@ -32,10 +34,10 @@ class DataSetsController < ApplicationController
 
   def update
     @data_set = DataSet.find(params[:id])
-    if !(JSON.is_json?(user_params[:json_data]))
+    if !(JSON.is_json?(data_set_params[:json_data]))
       redirect_to :back, notice: "Not JSON format."
     else
-      if @data_set.update(user_params)
+      if @data_set.update(data_set_params)
         redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
       else
         render 'edit'
@@ -51,7 +53,7 @@ class DataSetsController < ApplicationController
 
 private
 
-  def user_params
+  def data_set_params
     params.require(:data_set).permit(:name, :node, :json_data)
   end
 
