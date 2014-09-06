@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 
   root to: 'data_sets#index'
 
-  resources :users
+  resources :users, only: [:create]
   resources :data_sets
-  resources :sessions
+  resources :sessions, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
