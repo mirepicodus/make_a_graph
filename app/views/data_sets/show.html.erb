@@ -3,11 +3,14 @@
 <p><%= @data_set.node %></p>
 <p><%= @data_set.json_data %></p>
 
-<p><%= link_to "Edit", edit_data_set_path(@data_set), :class => "btn btn-default" %></p>
-<p><%= link_to "Delete", data_set_path(@data_set),
-                         :data => {:confirm => "You sure?",
-                                   :method => "delete"},
-                         :class => "btn btn-danger" %></p>
+<% if current_user == @data_set.user %>
+  <p><%= link_to "Edit", edit_data_set_path(@data_set), :class => "btn btn-default" %></p>
+  <p><%= link_to "Delete", data_set_path(@data_set),
+                           :data => {:confirm => "You sure?",
+                                     :method => "delete"},
+                           :class => "btn btn-danger" %></p>
+<% end %>
+
 
 <div class="alchemy" id="alchemy"></div>
   <script type="text/javascript">
