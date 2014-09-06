@@ -27,6 +27,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "Data Sets", root_path %></li>
+        <li><%= link_to "Make Data Set", new_data_set_path %></li>
         <% if current_user %>
           <li><a href="">Logged in as <%= current_user.email %></a></li>
           <li><%= link_to "Log Out", logout_path %></li>
