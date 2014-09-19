@@ -34,12 +34,16 @@ class DataSetsController < ApplicationController
   def update
     @data_set = DataSet.find(params[:id])
     begin
-      @data_set.update(data_set_params)
+      DataSet.new(data_set_params)
     rescue JSON::ParserError => error
       redirect_to :back, notice: "Not JSON format."
       return
     else
-      redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
+      if @data_set.update(data_set_params)
+        redirect_to data_set_path(@data_set), notice: "Thanks for updating!"
+      else
+        render 'edit'
+      end
     end
   end
 
