@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "the signup process" do
   it "signsup a user that gives email and correct password and confirmation" do
