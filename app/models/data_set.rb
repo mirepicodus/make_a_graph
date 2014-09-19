@@ -1,8 +1,20 @@
+class ValidNode < ActiveModel::Validator
+  def validate(data_set)
+    if !data_set.json_data.nil?
+      unless data_set.json_data.first.has_key?(data_set.node)
+        data_set.errors[:node] << 'Node not included as key in JSON'
+      end
+    end
+  end
+end
+
 class DataSet < ActiveRecord::Base
   belongs_to :user
   validates :name, presence: true
   validates :json_data, presence: true
   validates :node, presence: true
+  include ActiveModel::Validations
+  validates_with ValidNode
 
   def data_to_alchemy
     nodes = self.json_data.each_with_index do |element, index|
